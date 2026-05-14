@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0">
+    <title>ٍSTEM Cyber Traker</title>
+    <style>
+        :root{
+            --primary-color: #00d4ff;
+            --secondary-color: #151921;
+            --background-color: #0b0e14;
+            --text-color: #e2e8f0;
+         }
+         body{
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+            min-height: 100vh;
+
+         }
+         .card{
+            background-color: var(--secondary-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 1px solid #2d3748;
+            text-align: center;
+            width: 350px;
+         }
+            h1{
+                margin-bottom: 1rem;
+                color: var(--primary-color);
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+            #timer{
+                font-size: 5rem;
+                font-weight: bold;
+                color: var(--primary-color);
+                margin: 20px 0;
+                font-family: 'Courier New', Courier, monospace;
+            }
+            .controls{
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+             }
+             button{
+                background-color: transparent;
+                border: 1px solid var(--primary-color);
+                padding: 12px 24px;
+                border-radius: 8px;
+                color: var(--primary-color);
+                font-weight: bold;
+                cursor: pointer;
+                text-transform: uppercase;
+                transition:0.3s background-color ease;
+             }
+             button:hover{
+                background-color: var(--primary-color);
+                color: var(--background-color);
+                box-shadow: 0 0 15px var(--primary-color);
+            }
+         </style>
+</head>
+<body>
+<div class="card">
+    <h1>STEM Cyber Tracker</h1>
+    <div id="timer">25:00</div>
+    <div class="controls">
+        <button onclick="startTimer()">Start FOCUS</button>
+        <button onclick="resetTimer()">RESET</button>
+    </div>
+        <script>
+            let timer;
+            let timeLeft = 1500; // 25 minutes in seconds
+            let isRunning = false;
+            const timerDisplay = document.getElementById('timer');
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            function startTimer() {
+                if (isRunning) return;
+                isRunning = true;
+                timer = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        isRunning = false;
+                        alert("Focus session finished! Take a break.");
+                        resetTimer();
+                    } else {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    
+                    }
+                }, 1000);
+            }
+            function resetTimer() {
+                clearInterval(timer);
+                isRunning = false;
+                timeLeft = 1500;
+                updateTimerDisplay();
+            }
+        </script>
+</body>
+</html>
